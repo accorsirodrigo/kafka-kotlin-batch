@@ -1,3 +1,4 @@
+import java.net.URI
 
 val kotlin_version: String by project
 val logback_version: String by project
@@ -26,6 +27,9 @@ application {
 
 repositories {
     mavenCentral()
+    maven {
+        url = URI.create("https://packages.confluent.io/maven")
+    }
 }
 
 dependencies {
@@ -47,6 +51,12 @@ dependencies {
     implementation("io.insert-koin:koin-annotations:1.4.0-RC4")
     implementation("com.google.devtools.ksp:symbol-processing-api:1.9.24-1.0.20")
     ksp("io.insert-koin:koin-ksp-compiler:1.4.0-RC4")
+
+    //kafka
+    implementation("org.apache.kafka:kafka-clients:7.7.0-ce")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.9.0")
 
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
